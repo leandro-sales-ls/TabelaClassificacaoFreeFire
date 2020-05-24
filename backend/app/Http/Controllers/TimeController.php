@@ -23,8 +23,6 @@ class TimeController extends Controller
 
         $times = Time::all();
 
-        // var_dump($times);die;
-
         return view('pages.time', [
             'times' => $times,
         ]);
@@ -191,10 +189,8 @@ class TimeController extends Controller
             }  
     
         }
-        return response()->json([
-            'error' => $error,
-            'data'  => $data
-        ]);
+
+       return $this->index();
 
     }
     

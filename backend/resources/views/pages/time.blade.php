@@ -17,24 +17,39 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-              <table class="table">
-                <thead class=" text-primary"> 
-                  <th>
-                    Guild
-                  </th>
-                  <th>
-                    Lider
-                  </th>
-                </thead>
-                <tbody>
-                  @foreach ($times as $time)
-                    <tr>
-                      <td> {{$time->logo ." - ". $time->nome_time}} </td>
-                      <td> {{$time->nome_representante}} </td>
-                    </tr>                      
-                  @endforeach
-                </tbody>
-              </table>
+              <div class="container-fluid">
+                <table class="table table-hover table-sm">
+                  <thead class=" text-primary"> 
+                    <th>
+                      Guild
+                    </th>
+                    <th>
+                      Lider
+                    </th>
+                    <th>
+                      Ações
+                    </th>
+                  </thead>
+                  <tbody>
+                    @foreach ($times as $time)
+                      <tr>
+                        <td> {{$time->logo ." - ". $time->nome_time}} </td>
+                        <td> {{$time->nome_representante}} </td>
+                        <td> 
+                          <button class="btn btn-warning btn-sm" value=" {{$time->id}}">
+                            <span class="material-icons">edit</span>
+                          </button> 
+                          <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
+                          <button class="btn btn-danger btn-sm">
+                            <span class="material-icons">delete</span>
+                          </button> 
+                        </a>
+                        </td>
+                      </tr>                      
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>

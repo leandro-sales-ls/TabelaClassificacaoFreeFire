@@ -1,8 +1,5 @@
 @extends('layouts.app', ['activePage' => 'time', 'titlePage' => __('Cadastrar Time')])
 
-@php
-$errors
-@endphp
 
 @section('content')
 <div class="content">
@@ -20,7 +17,6 @@ $errors
           <div class="card-body">
             <div class="table-responsive">
 
-              
               <br>
               <form action="time-create" method="POST">
                
@@ -47,18 +43,9 @@ $errors
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
-                <div onLoad="md.showNotification('top','left')"></div>
+      
               </form>
 
-              
-
-              @if ($errors == null)
-              <div class="col-md-4">
-                <div onchange="md.showNotification('top','left')">error</div>
-              </div>
-              @else
-                <div onload="md.showNotification('top','right')"></div>
-              @endif
               
             </div>
           </div>

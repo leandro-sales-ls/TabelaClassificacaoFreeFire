@@ -26,6 +26,8 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 
+
+	//Time
 	Route::get('time', 'TimeController@index')->name('time');
 
 	Route::get('time-create', function () {
@@ -34,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('time-create', 'TimeController@store');
 
-
+	Route::get('/time-delete/{id}', 'TimeController@delete');
 
 
 	Route::get('table-list', function () {
