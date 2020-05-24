@@ -18,9 +18,16 @@ class TimeController extends Controller
 
     public function index()
     {
-        $repository = new TimeRepository;
-        return $repository->findAll();
+        // $times = new TimeRepository;
+        // $times->findAll();
 
+        $times = Time::all();
+
+        // var_dump($times);die;
+
+        return view('pages.time', [
+            'times' => $times,
+        ]);
     }
 
     public function store(Request $request)
@@ -30,6 +37,8 @@ class TimeController extends Controller
         $error = "";
         $data = $request->all();
 
+        // var_dump($data);die;
+
         $time = new Time;
         $time->fill($data);
         
@@ -38,10 +47,17 @@ class TimeController extends Controller
         }catch(\Exception $e){
             $error='Erro ao salvar time' . $e;
         }  
-        return response()->json([
-            'error' => $error,
-            'data'  => $time
-        ]);
+
+        return view('pages.time-create', 
+            [
+                'error' => $error,
+                'times'  => $time
+            ]
+        );
+        // return response()->json([
+        //     'error' => $error,
+        //     'data'  => $time
+        // ]);
     }
  
     public function edit($id)
