@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('time-create', 'TimeController@store');
 
 	Route::get('/time-delete/{id}', 'TimeController@delete');
+	
+	Route::get('/time-edit/{id}', 'TimeController@edit');
+	Route::get('/time-update/{id}', 'TimeController@update');
 
 
 	Route::get('table-list', function () {

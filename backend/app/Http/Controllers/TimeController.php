@@ -18,10 +18,8 @@ class TimeController extends Controller
 
     public function index()
     {
-        // $times = new TimeRepository;
-        // $times->findAll();
-
-        $times = Time::all();
+        $times = new TimeRepository;
+        $times = $times->findAll();
 
         return view('pages.time', [
             'times' => $times,
@@ -70,9 +68,8 @@ class TimeController extends Controller
             $error = "time não encontrado";  
         } 
 
-        return response()->json([
-            'error' => $error,
-            'data'  => $time  
+        return view('pages.time-edit', [
+            'time' => $time,
         ]);
 
     }
@@ -80,7 +77,7 @@ class TimeController extends Controller
     public function update($id, Request $request)
     {
         $error = "";
-        $data = $request->except(['_token']);
+        $data = $request->all();
 
         $time = Time::find($id); 
         
@@ -102,54 +99,21 @@ class TimeController extends Controller
             }  
 
         }
+
+        return $this->index();
             
-        return response()->json([
-            'error' => $error,
-            'data'  => $time
-        ]);
+        // return response()->json([
+        //     'error' => $error,
+        //     'data'  => $time
+        // ]);
 
     }
-
-    // public function filter(Request $request)
-    // {
-    //     try { 
-    //         $table=[];
-    //         $error="";
-    //         $repository = new TimeRepository;
-    //         $data = $request->all();
-    //         $Times = $repository->filter($data);
-            
-    //         foreach ($Times as $time)
-    //         {
-    //             $table[] = [
-    //             'id_Time'            => $time->id_Time,
-    //             'nom_colaborador'           => $time->nom_colaborador,
-    //             'nom_unidade'               => $time->nom_unidade, 
-    //             'nom_unidade_faturamento'   => $time->nom_unidade_faturamento, 
-    //             'data_inicio_vigencia'      => date('d/m/Y',strtotime($time->data_inicio_vigencia)),
-    //             'data_fim_vigencia'         => (isset ($time->data_fim_vigencia)? date('d/m/Y',strtotime($time->data_fim_vigencia)):''),
-    //             'flg_situacao'              => $time->flg_situacao
-    //             ];
-    //         }
-
-    //     }catch(\Exception $e){
-    //         $error='Erro Pesquisa Beneficiário' . $e;
-    //     }  
-    //     return response()->json([
-    //         'error' => $error,
-    //         'data'  => $table
-    //     ]);
-      
-
-    // }
 
     public function find($id)
     {
         $repository = new TimeRepository; 
         $time = $repository->find($id);
         $error = '';
-
-        // $resultado_time = get_object_vars($time);
         
         if (!$time)
         {

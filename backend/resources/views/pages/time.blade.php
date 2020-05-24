@@ -36,14 +36,19 @@
                         <td> {{$time->logo ." - ". $time->nome_time}} </td>
                         <td> {{$time->nome_representante}} </td>
                         <td> 
-                          <button class="btn btn-warning btn-sm" value=" {{$time->id}}">
-                            <span class="material-icons">edit</span>
-                          </button> 
+
+                          <a href="{{ url('/time-edit', ['id' => $time->id]) }}">
+                            <button class="btn btn-warning btn-sm">
+                              <span class="material-icons">edit</span>
+                            </button> 
+                          </a>
+
                           <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
-                          <button class="btn btn-danger btn-sm">
-                            <span class="material-icons">delete</span>
-                          </button> 
-                        </a>
+                            <button class="btn btn-danger btn-sm">
+                              <span class="material-icons">delete</span>
+                            </button> 
+                          </a>
+
                         </td>
                       </tr>                      
                     @endforeach
