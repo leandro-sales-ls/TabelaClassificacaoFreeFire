@@ -15,7 +15,8 @@ class TimeRepository
 	
 	public function find($id)
 	{
-        return  Time::all()->where('id', $id);
+		// return  Time::find
+        return  Time::where('id', $id)->first();
 	}  
 	
 }

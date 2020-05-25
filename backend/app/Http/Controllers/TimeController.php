@@ -50,10 +50,6 @@ class TimeController extends Controller
                 'times'  => $time
             ]
         );
-        // return response()->json([
-        //     'error' => $error,
-        //     'data'  => $time
-        // ]);
     }
  
     public function edit($id)
@@ -62,11 +58,12 @@ class TimeController extends Controller
 
         $repository = new TimeRepository; 
         $time = $repository->find($id); 
-
         if (!$time )
         {
             $error = "time não encontrado";  
         } 
+
+        // var_dump($time->id);die;
 
         return view('pages.times.time-edit', [
             'time' => $time,
@@ -101,11 +98,6 @@ class TimeController extends Controller
         }
 
         return $this->index();
-            
-        // return response()->json([
-        //     'error' => $error,
-        //     'data'  => $time
-        // ]);
 
     }
 

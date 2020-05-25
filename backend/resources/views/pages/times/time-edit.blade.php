@@ -16,9 +16,8 @@
           </div>
           <div class="card-body">
             <div class="table-responsive">
-
               <br>
-              <form action="{{ url('/time-update', ['id' => $time[0]->id]) }}">
+              <form action="{{ url('/time-update', ['id' => $time->id]) }}">
                
                 {{csrf_field()}}
                 <div class="form-group">
@@ -28,7 +27,7 @@
                     class="form-control" 
                     id="nome_time" 
                     name="nome_time" 
-                    value="{{$time[0]->nome_time}}"
+                    value="{{$time->nome_time}}"
                     required>
                 </div>
 
@@ -53,7 +52,7 @@
                     class="form-control" 
                     id="nome_representante" 
                     name="nome_representante" 
-                    value="{{$time[0]->nome_representante}}"
+                    value="{{$time->nome_representante}}"
                     required>
                 </div>
 
