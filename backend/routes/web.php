@@ -31,15 +31,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('time', 'TimeController@index')->name('time');
 
 	Route::get('time-create', function () {
-		return view('pages.time-create');
+		return view('pages.times.time-create');
 	})->name('table');
-
 	Route::post('time-create', 'TimeController@store');
-
 	Route::get('/time-delete/{id}', 'TimeController@delete');
-	
 	Route::get('/time-edit/{id}', 'TimeController@edit');
 	Route::get('/time-update/{id}', 'TimeController@update');
+
+	//partida
+	Route::get('partida', 'PartidaController@index')->name('partida');
+	Route::get('partida-create', function () {
+		return view('pages.partidas.partida-create');
+	})->name('table');
+	Route::post('partida-create', 'PartidaController@store');
 
 
 	Route::get('table-list', function () {

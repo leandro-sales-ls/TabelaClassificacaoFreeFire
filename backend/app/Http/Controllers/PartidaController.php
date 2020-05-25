@@ -19,7 +19,11 @@ class PartidaController extends Controller
     public function index()
     {
         $repository = new PartidaRepository;
-        return $repository->findAll();
+        $partida = $repository->findAll();
+
+        return view('pages.partidas.partida', [
+            'partida' => $partida,
+        ]);
 
     }
 
@@ -32,16 +36,24 @@ class PartidaController extends Controller
 
         $partida = new Partida;
         $partida->fill($data);
+
+        // var_dump($partida);die;
         
         $partida->save();
     
         }catch(\Exception $e){
             $error='Erro ao salvar Partida' . $e;
         }  
-        return response()->json([
-            'error' => $error,
-            'data'  => $partida
-        ]);
+        return view('pages.partidas.partida-create', 
+            [
+                'error' => $error,
+                'times'  => $partida
+            ]
+        );
+        // return response()->json([
+        //     'error' => $error,
+        //     'data'  => $partida
+        // ]);
     }
  
     public function edit($id)
@@ -49,16 +61,16 @@ class PartidaController extends Controller
         $error = "";
 
         $repository = new PartidaRepository; 
-        $Partida = $repository->find($id); 
+        $partida = $repository->find($id); 
 
-        if (!$Partida )
+        if (!$partida )
         {
             $error = "Partida não encontrado";  
         } 
 
         return response()->json([
             'error' => $error,
-            'data'  => $Partida  
+            'data'  => $partida  
         ]);
 
     }
@@ -89,10 +101,11 @@ class PartidaController extends Controller
 
         }
             
-        return response()->json([
-            'error' => $error,
-            'data'  => $Partida
-        ]);
+        return $this->index();
+        // return response()->json([
+        //     'error' => $error,
+        //     'data'  => $Partida
+        // ]);
 
     }
 
@@ -140,10 +153,12 @@ class PartidaController extends Controller
             }  
     
         }
-        return response()->json([
-            'error' => $error,
-            'data'  => $data
-        ]);
+
+        return $this->index();
+        // return response()->json([
+        //     'error' => $error,
+        //     'data'  => $data
+        // ]);
 
     }
     

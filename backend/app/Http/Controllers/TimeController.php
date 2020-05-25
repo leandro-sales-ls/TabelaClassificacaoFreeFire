@@ -21,7 +21,7 @@ class TimeController extends Controller
         $times = new TimeRepository;
         $times = $times->findAll();
 
-        return view('pages.time', [
+        return view('pages.times.time', [
             'times' => $times,
         ]);
     }
@@ -44,7 +44,7 @@ class TimeController extends Controller
             $error='Erro ao salvar time' . $e;
         }  
 
-        return view('pages.time-create', 
+        return view('pages.times.time-create', 
             [
                 'error' => $error,
                 'times'  => $time
@@ -68,7 +68,7 @@ class TimeController extends Controller
             $error = "time não encontrado";  
         } 
 
-        return view('pages.time-edit', [
+        return view('pages.times.time-edit', [
             'time' => $time,
         ]);
 
