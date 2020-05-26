@@ -15,7 +15,7 @@ class PartidaRepository
 	
 	public function find($id)
 	{
-        return  Partida::all()->where('id', $id);
+        return  Partida::where('id', $id)->first();
 	}  
 	
 }

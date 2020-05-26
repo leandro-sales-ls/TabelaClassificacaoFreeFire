@@ -7,41 +7,30 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <a href="/partida"><button class="btn btn-secondary">Voltar</button></a>
+          <a href="/ponto-kill"><button class="btn btn-secondary">Voltar</button></a>
         </div>
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Cadastrar Partida</h4>
+            <h4 class="card-title ">Cadastrar Pontos por Kill</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
 
               <br>
-              <form action="{{ url('/partida-update', ['id' => $partida->id]) }}">
+              <form action="ponto-kill-create" method="POST">
                
                 {{csrf_field()}}
+
                 <div class="form-group">
-                  <label for="num_rodada">Nome da Guilda</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="num_rodada" 
-                    name="num_rodada" 
-                    value="{{$partida->num_rodada}}"
-                    required>
+                  <label for="num_kill">Numero Kill</label>
+                  <input type="text" class="form-control" id="num_kill" name="num_kill" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="nome_representante1">Nome Representante</label>
-                  <input 
-                    type="text" 
-                    class="form-control" 
-                    id="id_temporada" 
-                    name="id_temporada" 
-                    value="{{$partida->id_temporada}}"
-                    required>
-                </div>
+                  <label for="ponto_kill">Pontos</label>
+                  <input type="text" class="form-control" id="ponto_kill" name="ponto_kill"  required>
+                </div>              
 
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Salvar</button>

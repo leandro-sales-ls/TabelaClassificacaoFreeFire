@@ -14,7 +14,7 @@ class Partida extends Model
     const UPDATED_AT = 'data_ult_alteracao';
 
     protected $fillable = [
-       'id_temporada','num_partida'
+       'num_rodada','id_temporada'
     ];
     
 }

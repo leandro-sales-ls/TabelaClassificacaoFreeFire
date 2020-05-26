@@ -19,7 +19,11 @@ class PontoPosicaoController extends Controller
     public function index()
     {
         $repository = new PontoPosicaoRepository;
-        return $repository->findAll();
+        $pontoPosicao = $repository->findAll();
+
+        return view('pages.pontosPosicao.pontos', [
+            'pontoPosicao' => $pontoPosicao,
+        ]);
 
     }
 
@@ -38,10 +42,13 @@ class PontoPosicaoController extends Controller
         }catch(\Exception $e){
             $error='Erro ao salvar pontoPosicao' . $e;
         }  
-        return response()->json([
-            'error' => $error,
-            'data'  => $pontoPosicao
-        ]);
+
+        return view('pages.pontosPosicao.ponto-posicao-create', 
+            [
+                'error' => $error,
+                'pontoPosicao'  => $pontoPosicao
+            ]
+        );
     }
  
     public function edit($id)
@@ -56,10 +63,9 @@ class PontoPosicaoController extends Controller
             $error = "pontoPosicao não encontrado";  
         } 
 
-        return response()->json([
-            'error' => $error,
-            'data'  => $pontoPosicao  
-        ]);
+        return view('pages.pontosPosicao.ponto-edit', [
+            'pontoPosicao' => $pontoPosicao,
+        ]);    
 
     }
 
@@ -88,11 +94,8 @@ class PontoPosicaoController extends Controller
             }  
 
         }
-            
-        return response()->json([
-            'error' => $error,
-            'data'  => $pontoPosicao
-        ]);
+
+        return $this->index();
 
     }
 
@@ -135,17 +138,14 @@ class PontoPosicaoController extends Controller
         } else {
 
             try { 
-                $pontoPosicao->each->delete();
+                $pontoPosicao->delete();
 
             }catch(\Exception $e){
                 $error='Erro ao excluir pontoPosicao' . $e;
             }  
     
         }
-        return response()->json([
-            'error' => $error,
-            'data'  => $data
-        ]);
+        return $this->index();
 
     }
     

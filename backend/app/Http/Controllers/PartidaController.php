@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Partida;
+use App\partida;
 use App\Repositories\PartidaRepository;
 
 use Carbon\Carbon;
@@ -21,6 +21,8 @@ class PartidaController extends Controller
         $repository = new PartidaRepository;
         $partida = $repository->findAll();
 
+        // dd($partida);
+
         return view('pages.partidas.partida', [
             'partida' => $partida,
         ]);
@@ -34,26 +36,20 @@ class PartidaController extends Controller
         $error = "";
         $data = $request->all();
 
-        $partida = new Partida;
+        $partida = new partida;
         $partida->fill($data);
-
-        // var_dump($partida);die;
         
         $partida->save();
     
         }catch(\Exception $e){
-            $error='Erro ao salvar Partida' . $e;
+            $error='Erro ao salvar partida' . $e;
         }  
         return view('pages.partidas.partida-create', 
             [
                 'error' => $error,
-                'times'  => $partida
+                'partida'  => $partida
             ]
         );
-        // return response()->json([
-        //     'error' => $error,
-        //     'data'  => $partida
-        // ]);
     }
  
     public function edit($id)
@@ -65,70 +61,64 @@ class PartidaController extends Controller
 
         if (!$partida )
         {
-            $error = "Partida não encontrado";  
+            $error = "partida não encontrado";  
         } 
-
-        return response()->json([
-            'error' => $error,
-            'data'  => $partida  
+        // var_dump($partida->id);die;
+        return view('pages.partidas.partida-edit', [
+            'partida' => $partida,
         ]);
-
     }
 
     public function update($id, Request $request)
     {
         $error = "";
-        $data = $request->except(['_token']);
+        $data = $request->all();
 
-        $Partida = Partida::find($id); 
-        
-        if (!$Partida)
+        $partida = partida::find($id); 
+
+        if (!$partida)
         {
-            $error = "Partida não encontrado";  
+            $error = "partida não encontrado";  
 
         } else {
 
-            $Partida->fill($data);
-
+            $partida->fill($data);
+            // dd($partida);
             try {  
                 
-                $Partida->save();
+                $partida->save();
             
             }catch(\Exception $e){
                 DB::rollback();
-                $error='Erro ao editar Partida' . $e;
+                $error='Erro ao editar partida' . $e;
             }  
 
         }
             
         return $this->index();
-        // return response()->json([
-        //     'error' => $error,
-        //     'data'  => $Partida
-        // ]);
 
     }
 
     public function find($id)
     {
         $repository = new PartidaRepository; 
-        $Partida = $repository->find($id);
+        $partida = $repository->find($id);
         $error = '';
         
-        if (!$Partida)
+        if (!$partida)
         {
-            $error = "Partida não encontrado";  
+            $error = "partida não encontrado";  
         } 
        
         return response()->json([
             'error' => $error,
-            'data'  => $Partida
+            'data'  => $partida
         ]);
     }
 
    /**
      *
-     * @param  \App\Partida  
+     * @param  \App\partida  
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
@@ -137,28 +127,24 @@ class PartidaController extends Controller
         $data = "";
          
         $repository = new PartidaRepository; 
-        $Partida = $repository->find($id); 
+        $partida = $repository->find($id); 
   
-        if (!$Partida)
+        if (!$partida)
         {
-            $error = "Partida não encontrado";  
+            $error = "partida não encontrado";  
 
         } else {
 
             try { 
-                $Partida->each->delete();
+                $partida->delete();
 
             }catch(\Exception $e){
-                $error='Erro ao excluir Partida' . $e;
+                $error='Erro ao excluir partida' . $e;
             }  
     
         }
 
         return $this->index();
-        // return response()->json([
-        //     'error' => $error,
-        //     'data'  => $data
-        // ]);
 
     }
     

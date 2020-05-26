@@ -56,6 +56,20 @@
         </a>
       </li>
 
+      <li class="nav-item{{ $activePage == 'pontoKill' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('pontoKill') }}">
+          <i class="material-icons">library_books</i>
+            <p>{{ __('Ponto por Kill') }}</p>
+        </a>
+      </li>
+
+      <li class="nav-item{{ $activePage == 'pontoPosicao' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('pontoPosicao') }}">
+          <i class="material-icons">library_books</i>
+            <p>{{ __('Ponto por Posição') }}</p>
+        </a>
+      </li>
+
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>

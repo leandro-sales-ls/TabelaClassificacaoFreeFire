@@ -14,7 +14,7 @@ class PontoPosicao extends Model
     const UPDATED_AT = 'data_ult_alteracao';
 
     protected $fillable = [
-       'pontos_posicao','posicao'
+        'posicao', 'pontos_posicao'
     ];
     
 }

@@ -15,7 +15,7 @@ class PontoPosicaoRepository
 	
 	public function find($id)
 	{
-        return  PontoPosicao::all()->where('id', $id);
+        return  PontoPosicao::where('id', $id)->first();
 	}  
 	
 }

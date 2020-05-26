@@ -15,7 +15,7 @@ class PontoKillRepository
 	
 	public function find($id)
 	{
-        return  PontoKill::all()->where('id', $id);
+        return  PontoKill::where('id', $id)->first();
 	}  
 	
 }

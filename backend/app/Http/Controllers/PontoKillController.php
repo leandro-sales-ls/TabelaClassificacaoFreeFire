@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\PontoKill;
+use App\pontoKill;
 use App\Repositories\PontoKillRepository;
 
 use Carbon\Carbon;
@@ -19,7 +19,11 @@ class PontoKillController extends Controller
     public function index()
     {
         $repository = new PontoKillRepository;
-        return $repository->findAll();
+        $pontoKill = $repository->findAll();
+
+        return view('pages.pontosKill.pontos', [
+            'pontoKill' => $pontoKill,
+        ]);
 
     }
 
@@ -30,18 +34,21 @@ class PontoKillController extends Controller
         $error = "";
         $data = $request->all();
 
-        $PontoKill = new PontoKill;
-        $PontoKill->fill($data);
+        $pontoKill = new pontoKill;
+        $pontoKill->fill($data);
         
-        $PontoKill->save();
+        $pontoKill->save();
     
         }catch(\Exception $e){
-            $error='Erro ao salvar PontoKill' . $e;
+            $error='Erro ao salvar pontoKill' . $e;
         }  
-        return response()->json([
-            'error' => $error,
-            'data'  => $PontoKill
-        ]);
+
+        return view('pages.pontosKill.ponto-kill-create', 
+            [
+                'error' => $error,
+                'pontoKill'  => $pontoKill
+            ]
+        );
     }
  
     public function edit($id)
@@ -49,17 +56,16 @@ class PontoKillController extends Controller
         $error = "";
 
         $repository = new PontoKillRepository; 
-        $PontoKill = $repository->find($id); 
+        $pontoKill = $repository->find($id); 
 
-        if (!$PontoKill )
+        if (!$pontoKill )
         {
-            $error = "PontoKill não encontrado";  
+            $error = "pontoKill não encontrado";  
         } 
 
-        return response()->json([
-            'error' => $error,
-            'data'  => $PontoKill  
-        ]);
+        return view('pages.pontosKill.ponto-edit', [
+            'pontoKill' => $pontoKill,
+        ]);     
 
     }
 
@@ -68,56 +74,50 @@ class PontoKillController extends Controller
         $error = "";
         $data = $request->except(['_token']);
 
-        $PontoKill = PontoKill::find($id); 
+        $pontoKill = pontoKill::find($id); 
         
-        if (!$PontoKill)
+        if (!$pontoKill)
         {
-            $error = "PontoKill não encontrado";  
+            $error = "pontoKill não encontrado";  
 
         } else {
 
-            $PontoKill->fill($data);
+            $pontoKill->fill($data);
 
             try {  
                 
-                $PontoKill->save();
+                $pontoKill->save();
             
             }catch(\Exception $e){
                 DB::rollback();
-                $error='Erro ao editar PontoKill' . $e;
+                $error='Erro ao editar pontoKill' . $e;
             }  
 
         }
-            
-        return response()->json([
-            'error' => $error,
-            'data'  => $PontoKill
-        ]);
+        return $this->index();
 
     }
 
     public function find($id)
     {
         $repository = new PontoKillRepository; 
-        $PontoKill = $repository->find($id);
+        $pontoKill = $repository->find($id);
         $error = '';
-
-        // $resultado_time = get_object_vars($PontoKill);
         
-        if (!$PontoKill)
+        if (!$pontoKill)
         {
-            $error = "PontoKill não encontrado";  
+            $error = "pontoKill não encontrado";  
         } 
        
         return response()->json([
             'error' => $error,
-            'data'  => $PontoKill
+            'data'  => $pontoKill
         ]);
     }
 
    /**
      *
-     * @param  \App\PontoKill  
+     * @param  \App\pontoKill  
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
@@ -126,26 +126,23 @@ class PontoKillController extends Controller
         $data = "";
          
         $repository = new PontoKillRepository; 
-        $PontoKill = $repository->find($id); 
+        $pontoKill = $repository->find($id); 
   
-        if (!$PontoKill)
+        if (!$pontoKill)
         {
-            $error = "PontoKill não encontrado";  
+            $error = "pontoKill não encontrado";  
 
         } else {
 
             try { 
-                $PontoKill->each->delete();
+                $pontoKill->delete();
 
             }catch(\Exception $e){
-                $error='Erro ao excluir PontoKill' . $e;
+                $error='Erro ao excluir pontoKill' . $e;
             }  
     
         }
-        return response()->json([
-            'error' => $error,
-            'data'  => $data
-        ]);
+        return $this->index();
 
     }
     
