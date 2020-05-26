@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'time', 'titlePage' => __('Cadastrar Time')])
+@extends('layouts.app', ['activePage' => 'time', 'titlePage' => __('Editar Time')])
 
 
 @section('content')
@@ -11,7 +11,7 @@
         </div>
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Cadastrar Time</h4>
+            <h4 class="card-title ">Editar Time</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">

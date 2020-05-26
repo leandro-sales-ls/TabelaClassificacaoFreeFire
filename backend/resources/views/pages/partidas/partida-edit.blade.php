@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'partida', 'titlePage' => __('Cadastrar Partida')])
+@extends('layouts.app', ['activePage' => 'partida', 'titlePage' => __('Editar Partida')])
 
 
 @section('content')
@@ -11,7 +11,7 @@
         </div>
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Cadastrar Partida</h4>
+            <h4 class="card-title ">Editar Partida</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">

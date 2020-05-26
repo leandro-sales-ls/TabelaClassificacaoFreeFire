@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'partida', 'titlePage' => __('Cadastrar Partida')])
+@extends('layouts.app', ['activePage' => 'pontoKill', 'titlePage' => __('Cadastrar Pontos por Kill')])
 
 
 @section('content')
