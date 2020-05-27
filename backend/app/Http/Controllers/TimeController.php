@@ -138,7 +138,7 @@ class TimeController extends Controller
         } else {
 
             try { 
-                $time->each->delete();
+                $time->delete();
 
             }catch(\Exception $e){
                 $error='Erro ao excluir Time' . $e;
