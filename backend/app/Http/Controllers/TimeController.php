@@ -134,14 +134,11 @@ class TimeController extends Controller
             $error = "Time não encontrado";
 
         } else {
-
             try {
                 $time->each->delete();
-
             }catch(\Exception $e){
                 $error='Erro ao excluir Time' . $e;
             }
-
         }
 
        return $this->index();
