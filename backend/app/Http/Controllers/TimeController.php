@@ -39,7 +39,7 @@ class TimeController extends Controller
         }
 
         }catch(\Exception $e){
-            $alert = ['status' => 'error', 'message' => 'Erro ao salvar time!'];
+            $alert = ['status' => 'error', 'message' => 'Erro ao salvar time! <br>'. substr($e->getMessage(), 0, 70)];
         }
 
         return view('pages.times.time-create',
