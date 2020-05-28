@@ -19,7 +19,7 @@
 
               <br>
               <form action="time-create" method="POST">
-               
+
                 {{csrf_field()}}
                 <div class="form-group">
                   <label for="nome_time">Nome da Guilda</label>
@@ -43,15 +43,8 @@
                 <div class="form-group">
                   <button type="submit" class="btn btn-primary">Salvar</button>
                 </div>
-      
-              </form>
 
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      
+              </form>
             </div>
           </div>
         </div>
@@ -59,4 +52,5 @@
     </div>
   </div>
 </div>
+
 @endsection

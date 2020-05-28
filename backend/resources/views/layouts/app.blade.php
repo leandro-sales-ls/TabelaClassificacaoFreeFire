@@ -27,7 +27,7 @@
         @guest()
             @include('layouts.page_templates.guest')
         @endguest
-        
+
         <div class="fixed-plugin">
           <div class="dropdown show-dropdown">
             <a href="#" data-toggle="dropdown">
@@ -146,5 +146,14 @@
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
         @stack('js')
+        @if(isset($alert))
+            <script>
+                $.notify({
+                    message: '<?= $alert["message"]?>'
+                },{
+                    type: '<?= $alert["status"] == 'error'?'danger':$alert["status"] ?>'
+                });
+            </script>
+        @endif
     </body>
 </html>

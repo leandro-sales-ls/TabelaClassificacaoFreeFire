@@ -22,46 +22,44 @@ class TimeController extends Controller
         $times = $times->findAll();
 
         return view('pages.times.time', [
-            'times' => $times,
+            'times' => $times
         ]);
     }
 
     public function store(Request $request)
     {
-        try{ 
-        
-        $error = "";
+        try{
         $data = $request->all();
-
-        // var_dump($data);die;
 
         $time = new Time;
         $time->fill($data);
-        
-        $time->save();
-    
-        }catch(\Exception $e){
-            $error='Erro ao salvar time' . $e;
-        }  
 
-        return view('pages.times.time-create', 
+        if($time->save()){
+            $alert = ['status' => 'success', 'message' => 'Time cadastrado com sucesso!'];
+        }
+
+        }catch(\Exception $e){
+            $alert = ['status' => 'error', 'message' => 'Erro ao salvar time!'];
+        }
+
+        return view('pages.times.time-create',
             [
-                'error' => $error,
-                'times'  => $time
+                'times'  => $time,
+                'alert' => $alert
             ]
         );
     }
- 
+
     public function edit($id)
     {
         $error = "";
 
-        $repository = new TimeRepository; 
-        $time = $repository->find($id); 
+        $repository = new TimeRepository;
+        $time = $repository->find($id);
         if (!$time )
         {
-            $error = "time não encontrado";  
-        } 
+            $error = "time não encontrado";
+        }
 
         // var_dump($time->id);die;
 
@@ -76,24 +74,24 @@ class TimeController extends Controller
         $error = "";
         $data = $request->all();
 
-        $time = Time::find($id); 
-        
+        $time = Time::find($id);
+
         if (!$time)
         {
-            $error = "Time não encontrado";  
+            $error = "Time não encontrado";
 
         } else {
 
             $time->fill($data);
 
-            try {  
-                
+            try {
+
                 $time->save();
-            
+
             }catch(\Exception $e){
                 DB::rollback();
                 $error='Erro ao editar Time' . $e;
-            }  
+            }
 
         }
 
@@ -103,15 +101,15 @@ class TimeController extends Controller
 
     public function find($id)
     {
-        $repository = new TimeRepository; 
+        $repository = new TimeRepository;
         $time = $repository->find($id);
         $error = '';
-        
+
         if (!$time)
         {
-            $error = "Time não encontrado";  
-        } 
-       
+            $error = "Time não encontrado";
+        }
+
         return response()->json([
             'error' => $error,
             'data'  => $time
@@ -120,35 +118,35 @@ class TimeController extends Controller
 
    /**
      *
-     * @param  \App\Time  
+     * @param  \App\Time
      * @return \Illuminate\Http\Response
      */
     public function delete($id)
     {
         $error = "";
         $data = "";
-         
-        $repository = new TimeRepository; 
-        $time = $repository->find($id); 
-  
+
+        $repository = new TimeRepository;
+        $time = $repository->find($id);
+
         if (!$time)
         {
-            $error = "Time não encontrado";  
+            $error = "Time não encontrado";
 
         } else {
 
-            try { 
+            try {
                 $time->each->delete();
 
             }catch(\Exception $e){
                 $error='Erro ao excluir Time' . $e;
-            }  
-    
+            }
+
         }
 
        return $this->index();
 
     }
-    
-  
+
+
 }
