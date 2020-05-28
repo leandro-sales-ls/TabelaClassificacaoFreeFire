@@ -52,7 +52,7 @@
                         </td>
                       </tr>
                     @endforeach
-                    <button onclick="chamar()">aqui</button>
+                    {{-- <button onclick="chamar()">aqui</button> --}}
                   </tbody>
                 </table>
               </div>
