@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PontoPosicao extends Model
+class Temporada extends Model
 {
     protected $connection = 'pgsql';
-    protected $table = 'ponto_posicao';
+    protected $table = 'temporada';
     protected $primaryKey = 'id';
   
     const CREATED_AT = 'data_inclusao';
     const UPDATED_AT = 'data_ult_alteracao';
 
     protected $fillable = [
-        'id_temporada','posicao', 'pontos_posicao'
+       'nome_temporada','num_max_partida'
     ];
     
 }

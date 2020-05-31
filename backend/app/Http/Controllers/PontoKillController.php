@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\pontoKill;
 use App\Repositories\PontoKillRepository;
 
+use App\Temporada;
+use App\Repositories\TemporadaRepository;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -18,13 +21,23 @@ class PontoKillController extends Controller
 
     public function index()
     {
-        $repository = new PontoKillRepository;
-        $pontoKill = $repository->findAll();
+        $pontoKill = new PontoKillRepository;
+        $pontoKill = $pontoKill->findAll();
 
         return view('pages.pontosKill.pontos', [
             'pontoKill' => $pontoKill,
         ]);
 
+    }
+
+    public function create()
+    {
+        $temporadas = new TemporadaRepository;
+        $temporadas = $temporadas->findAll();
+
+        return view('pages.pontosKill.ponto-kill-create', [
+            'temporadas' => $temporadas
+        ]);
     }
 
     public function store(Request $request)
@@ -36,6 +49,9 @@ class PontoKillController extends Controller
 
         $pontoKill = new pontoKill;
         $pontoKill->fill($data);
+
+        $temporadas = new TemporadaRepository;
+        $temporadas = $temporadas->findAll();
         
         $pontoKill->save();
     
@@ -46,6 +62,7 @@ class PontoKillController extends Controller
         return view('pages.pontosKill.ponto-kill-create', 
             [
                 'error' => $error,
+                'temporadas' => $temporadas,
                 'pontoKill'  => $pontoKill
             ]
         );

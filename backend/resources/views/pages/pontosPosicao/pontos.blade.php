@@ -21,6 +21,9 @@
                 <table class="table table-hover table-sm">
                   <thead class=" text-primary"> 
                     <th>
+                      Temporada
+                     </th>
+                    <th>
                       Posição
                     </th>
                     <th>
@@ -33,6 +36,7 @@
                   <tbody>
                     @foreach ($pontoPosicao as $item)
                       <tr>
+                        <td> {{$item->nome_temporada}} </td>
                         <td> {{$item->posicao}} </td>
                         <td> {{$item->pontos_posicao}} </td>
                         <td> 

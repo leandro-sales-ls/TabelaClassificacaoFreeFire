@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'partida', 'titlePage' => __('Partidas')])
+@extends('layouts.app', ['activePage' => 'temporada', 'titlePage' => __('Temporada')])
 
 @section('content')
 <div class="content">
@@ -6,14 +6,14 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <a href="/partida-create"><button class="btn btn-primary">Cadastrar</button></a>
+          <a href="/temporada-create"><button class="btn btn-primary">Cadastrar</button></a>
           
         </div>
         <div class="card">
           
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Partidas</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            <h4 class="card-title ">Temporadas</h4>
+            {{-- <p class="card-category"> Here is a subtitle for this table</p> --}}
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -21,29 +21,35 @@
                 <table class="table table-hover table-sm">
                   <thead class=" text-primary"> 
                     <th>
-                      Numero da rodada
+                      Temporada
                     </th>
                     <th>
-                      Temporada - ID
+                      Numero Maximo de Partida
                     </th>
                     <th>
                       Ações
                     </th>
                   </thead>
                   <tbody>
-                    @foreach ($partida as $item)
+                    @foreach ($temporada as $item)
                       <tr>
-                        <td> {{$item->num_rodada}} </td>
-                        <td> {{$item->id_temporada}} </td>
+                        <td> {{$item->nome_temporada}} </td>
+                        <td> {{$item->num_max_partida}} </td>
                         <td> 
 
-                          <a href="{{ url('/partida-edit', ['id' => $item->id]) }}">
+                          <a href="{{ url('/temporada-time', ['id' => $item->id]) }}">
+                            <button class="btn btn-primary btn-sm">
+                              <span class="material-icons">queue</span>
+                            </button> 
+                          </a>
+
+                          <a href="{{ url('/temporada-edit', ['id' => $item->id]) }}">
                             <button class="btn btn-warning btn-sm">
                               <span class="material-icons">edit</span>
                             </button> 
                           </a>
 
-                          <a href="{{ url('/partida-delete', ['id' => $item->id]) }}">
+                          <a href="{{ url('/temporada-delete', ['id' => $item->id]) }}">
                             <button class="btn btn-danger btn-sm">
                               <span class="material-icons">delete</span>
                             </button> 

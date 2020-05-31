@@ -21,6 +21,9 @@
                 <table class="table table-hover table-sm">
                   <thead class=" text-primary"> 
                     <th>
+                     Temporada
+                    </th>
+                    <th>
                       Número de Kill
                     </th>
                     <th>
@@ -33,6 +36,7 @@
                   <tbody>
                     @foreach ($pontoKill as $item)
                       <tr>
+                        <td> {{$item->nome_temporada}} </td>
                         <td> {{$item->num_kill}} </td>
                         <td> {{$item->ponto_kill}} </td>
                         <td> 

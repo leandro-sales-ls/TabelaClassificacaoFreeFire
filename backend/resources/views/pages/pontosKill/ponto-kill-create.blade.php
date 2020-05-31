@@ -23,6 +23,20 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
+                  <label for="id_temporara">Temporada</label> 
+                  <select name="id_temporara" class="custom-select" required>
+                    <option disabled selected>Selecione um Time</option>
+
+                    @foreach ($temporadas as $temporada)
+                      <option value="{{$temporada->id}}">{{$temporada->nome_temporada}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <p style="{ margin-top: 3cm; }"></p>
+
+                <div class="form-group">
                   <label for="num_kill">Numero Kill</label>
                   <input type="text" class="form-control" id="num_kill" name="num_kill" required>
                 </div>

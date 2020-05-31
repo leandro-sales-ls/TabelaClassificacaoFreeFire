@@ -23,6 +23,18 @@
                 {{csrf_field()}}
 
                 <div class="form-group">
+                  <label for="id_temporara">Temporada</label> 
+                  <select name="id_temporara" class="custom-select" required>
+                    <option disabled selected>Selecione um Time</option>
+
+                    @foreach ($temporadas as $temporada)
+                      <option value="{{$temporada->id}}">{{$temporada->nome_temporada}}</option>
+                    @endforeach
+
+                  </select>
+                </div>
+
+                <div class="form-group">
                   <label for="posicao">Posição</label>
                   <input type="text" class="form-control" id="posicao" name="posicao" required>
                 </div>

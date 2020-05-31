@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'partida', 'titlePage' => __('Cadastrar Partida')])
+@extends('layouts.app', ['activePage' => 'temporada', 'titlePage' => __('Cadastrar Temporada')])
 
 
 @section('content')
@@ -7,28 +7,28 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group">
-          <a href="/partida"><button class="btn btn-secondary">Voltar</button></a>
+          <a href="/temporada"><button class="btn btn-secondary">Voltar</button></a>
         </div>
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title ">Cadastrar Partida</h4>
+            <h4 class="card-title ">Cadastrar Temporada</h4>
             <p class="card-category"></p>
           </div>
           <div class="card-body">
             <div class="table-responsive">
 
               <br>
-              <form action="partida-create" method="POST">
+              <form action="temporada-create" method="POST">
                
                 {{csrf_field()}}
                 <div class="form-group">
-                  <label for="num_rodada">Numero de Rodadas</label>
-                  <input type="text" class="form-control" id="num_rodada" name="num_rodada"  required>
+                  <label for="nome_temporada">Nome da Temporada</label>
+                  <input type="text" class="form-control" id="nome_temporada" name="nome_temporada"  required>
                 </div>
 
                 <div class="form-group">
-                  <label for="id_temporada">Temporada</label>
-                  <input type="text" class="form-control" id="id_temporada" name="id_temporada" required>
+                  <label for="num_max_partida">Número Máximo de Partidas</label>
+                  <input type="text" class="form-control" id="num_max_partida" name="num_max_partida" required>
                 </div>
 
                 <div class="form-group">

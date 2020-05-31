@@ -14,7 +14,7 @@ class PontoKill extends Model
     const UPDATED_AT = 'data_ult_alteracao';
 
     protected $fillable = [
-       'ponto_kill','num_kill'
+        'id_temporada','ponto_kill','num_kill'
     ];
     
 }

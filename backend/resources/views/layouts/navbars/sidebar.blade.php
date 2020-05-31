@@ -49,10 +49,10 @@
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'partida' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('partida') }}">
+      <li class="nav-item{{ $activePage == 'temporada' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('temporada') }}">
           <i class="material-icons">content_paste</i>
-            <p>{{ __('Partidas - Rodada') }}</p>
+            <p>{{ __('Temporadas') }}</p>
         </a>
       </li>
 

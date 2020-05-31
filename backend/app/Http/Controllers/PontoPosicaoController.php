@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\PontoPosicao;
 use App\Repositories\PontoPosicaoRepository;
 
+use App\Temporada;
+use App\Repositories\TemporadaRepository;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -27,6 +30,16 @@ class PontoPosicaoController extends Controller
 
     }
 
+    public function create()
+    {
+        $temporadas = new TemporadaRepository;
+        $temporadas = $temporadas->findAll();
+
+        return view('pages.pontosPosicao.ponto-posicao-create', [
+            'temporadas' => $temporadas
+        ]);
+    }
+
     public function store(Request $request)
     {
         try{ 
@@ -38,6 +51,9 @@ class PontoPosicaoController extends Controller
         $pontoPosicao->fill($data);
         
         $pontoPosicao->save();
+
+        $temporadas = new TemporadaRepository;
+        $temporadas = $temporadas->findAll();
     
         }catch(\Exception $e){
             $error='Erro ao salvar pontoPosicao' . $e;
@@ -46,7 +62,8 @@ class PontoPosicaoController extends Controller
         return view('pages.pontosPosicao.ponto-posicao-create', 
             [
                 'error' => $error,
-                'pontoPosicao'  => $pontoPosicao
+                'pontoPosicao'  => $pontoPosicao,
+                'temporadas' => $temporadas,
             ]
         );
     }

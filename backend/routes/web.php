@@ -38,33 +38,33 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/time-update/{id}', 'TimeController@update');
 
 
-	//partida
-	Route::get('partida', 'PartidaController@index')->name('partida');
-	Route::get('partida-create', function () {
-		return view('pages.partidas.partida-create');
+	//temporada
+	Route::get('temporada', 'TemporadaController@index')->name('temporada');
+	Route::get('temporada-create', function () {
+		return view('pages.temporadas.temporada-create');
 	})->name('table');
-	Route::post('partida-create', 'PartidaController@store');
-	Route::get('/partida-delete/{id}', 'PartidaController@delete');
-	Route::get('/partida-edit/{id}', 'PartidaController@edit');
-	Route::get('/partida-update/{id}', 'PartidaController@update');
+	Route::post('temporada-create', 'TemporadaController@store');
+	Route::get('/temporada-delete/{id}', 'TemporadaController@delete');
+	Route::get('/temporada-edit/{id}', 'TemporadaController@edit');
+	Route::get('/temporada-update/{id}', 'TemporadaController@update');
+	Route::get('/temporada-time/{id}', 'TemporadaController@temporadaTime');
+	Route::post('/temporada-time', 'TemporadaController@temporadaTimeAdd');
+	Route::get('/temporada-time-delete/{id}/{id_temporada}', 'TemporadaController@deleteTemporadaTime');
+	
 
 
 	//Ponto Kill 
 	Route::get('ponto-kill', 'PontoKillController@index')->name('pontoKill');
-	Route::get('ponto-kill-create', function () {
-		return view('pages.pontosKill.ponto-kill-create');
-	})->name('table');
+	Route::get('ponto-kill-create', 'PontoKillController@create');
 	Route::post('ponto-kill-create', 'PontoKillController@store');
 	Route::get('/ponto-kill-delete/{id}', 'PontoKillController@delete');
 	Route::get('/ponto-kill-edit/{id}', 'PontoKillController@edit');
 	Route::get('/ponto-kill-update/{id}', 'PontoKillController@update');
 
 
-	//Ponto Kill 
+	//Ponto Posição
 	Route::get('ponto-posicao', 'PontoPosicaoController@index')->name('pontoPosicao');
-	Route::get('ponto-posicao-create', function () {
-		return view('pages.pontosPosicao.ponto-posicao-create');
-	})->name('table');
+	Route::get('ponto-posicao-create', 'PontoPosicaoController@create');
 	Route::post('ponto-posicao-create', 'PontoPosicaoController@store');
 	Route::get('/ponto-posicao-delete/{id}', 'PontoPosicaoController@delete');
 	Route::get('/ponto-posicao-edit/{id}', 'PontoPosicaoController@edit');

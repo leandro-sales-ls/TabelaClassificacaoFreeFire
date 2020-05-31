@@ -35,11 +35,20 @@ class TimeController extends Controller
         $time->fill($data);
 
         if($time->save()){
-            $alert = ['status' => 'success', 'message' => 'Time cadastrado com sucesso!'];
+
+            $alert = [
+                'status' => 'success', 
+                'message' => 'Time cadastrado com sucesso!'
+            ];
         }
 
         }catch(\Exception $e){
-            $alert = ['status' => 'error', 'message' => 'Erro ao salvar time! <br>'. substr($e->getMessage(), 0, 70)];
+
+            $alert = [
+                'status' => 'error', 
+                'message' => 'Erro ao salvar time! <br>'. substr($e->getMessage(), 0, 70)
+            ];
+            
         }
 
         return view('pages.times.time-create',
