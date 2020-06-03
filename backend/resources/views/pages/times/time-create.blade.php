@@ -27,11 +27,14 @@
                 </div>
 
                 <div class="form-group">
-                  <input type="file" class="custom-file-input" id="logo" name="logo" lang="es">
-                  <label class="custom-file-label" for="customFileLang">Selecionar a logo</label>
+
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="logo" name="logo" required>
+                    <label class="custom-file-label" for="logo">Selecione uma logo</label>
+                  </div>
                 </div>
 
-                <br>
+                {{-- <br> --}}
                 <hr>
                 <br>
 

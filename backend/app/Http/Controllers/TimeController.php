@@ -21,7 +21,15 @@ class TimeController extends Controller
         $times = new TimeRepository;
         $times = $times->findAll();
 
-        // var_dump($times);die;
+        // foreach ($times as $time) {
+        //     $logo = base64_encode($time->logo);
+        //     $mime = Storage::get($logo);
+        //     $src  = 'data: '.$mime.';base64,'.$logo;
+
+        //     $time->logo = 'data: image/jpeg;base64,'.$logo;
+        // }
+
+        // var_dump($times->logo);die;
 
         return view('pages.times.time', [
             'times' => $times
@@ -32,6 +40,10 @@ class TimeController extends Controller
     {
         try{
         $data = $request->all();
+
+        // $upload = Storage::put('file.jpg', $data['logo']);
+        
+        // $data['logo'] = base64_encode($data['logo']);        
 
         $time = new Time;
         $time->fill($data);

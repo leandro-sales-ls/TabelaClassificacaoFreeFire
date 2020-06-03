@@ -13,7 +13,7 @@
 
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Times</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
+            {{-- <p class="card-category"> Here is a subtitle for this table</p> --}}
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -33,7 +33,9 @@
                   <tbody>
                     @foreach ($times as $time)
                       <tr>
-                        <td> {{$time->logo ." - ". $time->nome_time}} </td>
+                      <td> <img src="<?= $time->logo; ?>"  height="42" width="42"> 
+                        {{" - ". $time->logo}} 
+                      </td>
                         <td> {{$time->nome_representante}} </td>
                         <td>
 
