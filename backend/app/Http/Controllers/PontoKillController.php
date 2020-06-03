@@ -53,17 +53,26 @@ class PontoKillController extends Controller
         $temporadas = new TemporadaRepository;
         $temporadas = $temporadas->findAll();
         
-        $pontoKill->save();
+        if ($pontoKill->save()) {
+            $alert = [
+                'status' => 'success', 
+                'message' => 'Pontos por kill cadastrado com sucesso'
+            ];
+        }
     
         }catch(\Exception $e){
-            $error='Erro ao salvar pontoKill' . $e;
+            $alert = [
+                'status' => 'error', 
+                'message' => 'Erro ao salvar pontos <br>'. substr($e->getMessage(), 0, 70)
+            ];
         }  
 
         return view('pages.pontosKill.ponto-kill-create', 
             [
                 'error' => $error,
                 'temporadas' => $temporadas,
-                'pontoKill'  => $pontoKill
+                'pontoKill'  => $pontoKill,
+                'alert' => $alert
             ]
         );
     }
@@ -103,15 +112,31 @@ class PontoKillController extends Controller
 
             try {  
                 
-                $pontoKill->save();
+                if ($pontoKill->save()) { 
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Pontos por kill editado com sucesso'
+                    ];
+                }
             
             }catch(\Exception $e){
                 DB::rollback();
-                $error='Erro ao editar pontoKill' . $e;
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar pontos! <br>'. substr($e->getMessage(), 0, 70)
+                ];
             }  
 
         }
-        return $this->index();
+
+        $pontoKill = new PontoKillRepository;
+        $pontoKill = $pontoKill->findAll();
+
+        return view('pages.pontosKill.pontos', [
+            'pontoKill' => $pontoKill,
+            'alert'=> $alert
+        ]);
+
 
     }
 
@@ -152,14 +177,29 @@ class PontoKillController extends Controller
         } else {
 
             try { 
-                $pontoKill->delete();
+                if ($pontoKill->delete()) {
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Pontos por kill apagado com sucesso'
+                    ];
+                }
 
             }catch(\Exception $e){
-                $error='Erro ao excluir pontoKill' . $e;
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar pontos! <br>'. substr($e->getMessage(), 0, 70)
+                ];
             }  
     
         }
-        return $this->index();
+
+        $pontoKill = new PontoKillRepository;
+        $pontoKill = $pontoKill->findAll();
+
+        return view('pages.pontosKill.pontos', [
+            'pontoKill' => $pontoKill,
+            'alert'=> $alert
+        ]);
 
     }
     

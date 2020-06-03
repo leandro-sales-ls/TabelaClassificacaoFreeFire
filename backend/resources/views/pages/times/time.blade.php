@@ -45,6 +45,7 @@
 
                           <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
                             <button class="btn btn-danger btn-sm">
+                            {{-- <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> --}}
                               <span class="material-icons">delete</span>
                             </button>
                           </a>
@@ -52,9 +53,31 @@
                         </td>
                       </tr>
                     @endforeach
-                    {{-- <button onclick="chamar()">aqui</button> --}}
                   </tbody>
                 </table>
+                
+                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h6>Tem certeza que deseja apagar o time {{$time->nome_time}}</h6>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
+                          <button type="button" class="btn btn-danger">Confirma</button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div> --}}
+
               </div>
             </div>
           </div>

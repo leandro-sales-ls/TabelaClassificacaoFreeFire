@@ -25,8 +25,6 @@ class TemporadaController extends Controller
         $repository = new TemporadaRepository;
         $temporada = $repository->findAll();
 
-        // dd($temporada);
-
         return view('pages.temporadas.temporada', [
             'temporada' => $temporada,
         ]);
@@ -43,15 +41,25 @@ class TemporadaController extends Controller
         $temporada = new Temporada;
         $temporada->fill($data);
         
-        $temporada->save();
+        if ($temporada->save()) {
+           
+            $alert = [
+                'status' => 'success', 
+                'message' => 'Temporada cadastrada com sucesso!'
+            ];
+
+        }
     
         }catch(\Exception $e){
-            $error='Erro ao salvar temporada' . $e;
+            $alert = [
+                'status' => 'error', 
+                'message' => 'Erro ao salvar temporada! <br>'. substr($e->getMessage(), 0, 70)
+            ];
         }  
         return view('pages.temporadas.temporada-create', 
             [
-                'error' => $error,
-                'temporada'  => $temporada
+                'temporada'  => $temporada,
+                'alert'=>$alert
             ]
         );
     }
@@ -87,19 +95,39 @@ class TemporadaController extends Controller
         } else {
 
             $temporada->fill($data);
-            // dd($temporada);
+
             try {  
                 
-                $temporada->save();
+                if ($temporada->save()) {
+
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Temporada editada com sucesso'
+                    ];
+
+                }
             
             }catch(\Exception $e){
                 DB::rollback();
                 $error='Erro ao editar temporada' . $e;
+
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar temporada <br>'. substr($e->getMessage(), 0, 70)
+                ];
             }  
 
         }
+
+        $repository = new TemporadaRepository;
+        $temporada = $repository->findAll();
             
-        return $this->index();
+        return view('pages.temporadas.temporada', 
+            [
+                'temporada'  => $temporada,
+                'alert'=>$alert
+            ]
+        );
 
     }
 
@@ -180,7 +208,6 @@ class TemporadaController extends Controller
             
             $error = "";
             $data = $request->all();
-            // var_dump($data["id_temporada"]);die;
 
             $temporada = new TemporadaTime;
             $temporada->fill($data);

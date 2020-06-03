@@ -21,6 +21,8 @@ class TimeController extends Controller
         $times = new TimeRepository;
         $times = $times->findAll();
 
+        // var_dump($times);die;
+
         return view('pages.times.time', [
             'times' => $times
         ]);
@@ -95,16 +97,32 @@ class TimeController extends Controller
 
             try {
 
-                $time->save();
+                if ($time->save()) {
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Time editado com sucesso!'
+                    ];
+                }
 
             }catch(\Exception $e){
                 DB::rollback();
-                $error='Erro ao editar Time' . $e;
+
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar time! <br>'. substr($e->getMessage(), 0, 70)
+                ];
+
             }
 
         }
 
-        return $this->index();
+        $times = new TimeRepository;
+        $times = $times->findAll();
+
+        return view('pages.times.time', [
+            'times' => $times,
+            'alert' => $alert
+        ]);
 
     }
 
@@ -144,13 +162,33 @@ class TimeController extends Controller
 
         } else {
             try {
-                $time->delete();
-            }catch(\Exception $e){
-                $error='Erro ao excluir Time' . $e;
+                if ($time->delete()) {
+
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Time excluido com sucesso!'
+                    ];
+                }
+
+            } catch(\Exception $e){
+
+                // $error='Erro ao excluir Time' . $e;
+
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao excluir time! <br>'. substr($e->getMessage(), 0, 70)
+                ];
+
             }
         }
 
-       return $this->index();
+        $times = new TimeRepository;
+        $times = $times->findAll();
+        
+        return view('pages.times.time', [
+            'times' => $times,
+            'alert' => $alert
+        ]);
 
     }
 

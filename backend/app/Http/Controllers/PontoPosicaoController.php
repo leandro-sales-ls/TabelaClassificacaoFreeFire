@@ -50,13 +50,21 @@ class PontoPosicaoController extends Controller
         $pontoPosicao = new PontoPosicao;
         $pontoPosicao->fill($data);
         
-        $pontoPosicao->save();
+        if ($pontoPosicao->save()) {
+            $alert = [
+                'status' => 'success', 
+                'message' => 'Pontos por posição cadastrado com sucesso'
+            ];
+        }
 
         $temporadas = new TemporadaRepository;
         $temporadas = $temporadas->findAll();
     
         }catch(\Exception $e){
-            $error='Erro ao salvar pontoPosicao' . $e;
+            $alert = [
+                'status' => 'error', 
+                'message' => 'Erro ao salvar pontos <br>'. substr($e->getMessage(), 0, 70)
+            ];
         }  
 
         return view('pages.pontosPosicao.ponto-posicao-create', 
@@ -64,6 +72,7 @@ class PontoPosicaoController extends Controller
                 'error' => $error,
                 'pontoPosicao'  => $pontoPosicao,
                 'temporadas' => $temporadas,
+                'alert' => $alert
             ]
         );
     }
@@ -103,16 +112,30 @@ class PontoPosicaoController extends Controller
 
             try {  
                 
-                $pontoPosicao->save();
+                if ($pontoPosicao->save()) { 
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Pontos por posição editado com sucesso'
+                    ];
+                }
             
             }catch(\Exception $e){
                 DB::rollback();
-                $error='Erro ao editar pontoPosicao' . $e;
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar pontos! <br>'. substr($e->getMessage(), 0, 70)
+                ];
             }  
 
         }
 
-        return $this->index();
+        $repository = new PontoPosicaoRepository;
+        $pontoPosicao = $repository->findAll();
+
+        return view('pages.pontosPosicao.pontos', [
+            'pontoPosicao' => $pontoPosicao,
+            'alert'=> $alert
+        ]);
 
     }
 
@@ -121,8 +144,6 @@ class PontoPosicaoController extends Controller
         $repository = new PontoPosicaoRepository; 
         $pontoPosicao = $repository->find($id);
         $error = '';
-
-        // $resultado_time = get_object_vars($pontoPosicao);
         
         if (!$pontoPosicao)
         {
@@ -155,14 +176,28 @@ class PontoPosicaoController extends Controller
         } else {
 
             try { 
-                $pontoPosicao->delete();
+                if ($pontoPosicao->delete()) {
+                    $alert = [
+                        'status' => 'success', 
+                        'message' => 'Pontos por posição editado com sucesso'
+                    ];
+                }
 
             }catch(\Exception $e){
-                $error='Erro ao excluir pontoPosicao' . $e;
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Erro ao editar pontos! <br>'. substr($e->getMessage(), 0, 70)
+                ];
             }  
     
         }
-        return $this->index();
+        $repository = new PontoPosicaoRepository;
+        $pontoPosicao = $repository->findAll();
+
+        return view('pages.pontosPosicao.pontos', [
+            'pontoPosicao' => $pontoPosicao,
+            'alert'=> $alert
+        ]);
 
     }
     
