@@ -16,6 +16,12 @@ class TemporadaRepository
 	public function find($id)
 	{
         return  Temporada::where('id', $id)->first();
-	}  
+	} 
+
+	public function findSingleDescId()
+	{
+        return  Temporada::orderBy('id', 'DESC')->first();
+	} 
+
 	
 }

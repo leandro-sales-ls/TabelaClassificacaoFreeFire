@@ -72,8 +72,11 @@
                   <tbody>
                     @foreach ($temporadaTime as $item)
                       <tr>
-                        <td> {{$item->logo.'-'.$item->nome_time}} </td>
-                        <td> {{$item->nome_representante}} </td>
+                        <td> <img 
+                          class="img-responsive img thumbnail" 
+                          src="/storage/{{$item->logo}}" > 
+                          <span class="font-weight-bold">{{$item->nome_time}}</span> </td>
+                        <td> <span class="font-weight-bold">{{$time->nome_representante}} </span></td>
                         <td> 
                           <a href="{{ url('/temporada-time-delete', array('id' => $item->id, 'id_temporada' => $temporada->id)) }}">
                             <button class="btn btn-danger btn-sm">
@@ -99,4 +102,14 @@
     </div>
   </div>
 </div>
+
+<style>
+  img{
+  background-color: #ddd;
+  border-radius: 100%;
+  height: 4rem;
+  object-fit: cover;
+  width: 4rem;  
+}
+</style>
 @endsection

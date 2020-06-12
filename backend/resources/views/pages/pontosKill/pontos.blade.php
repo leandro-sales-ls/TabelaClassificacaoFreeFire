@@ -20,9 +20,9 @@
               <div class="container-fluid">
                 <table class="table table-hover table-sm">
                   <thead class=" text-primary"> 
-                    <th>
+                    {{-- <th>
                      Temporada
-                    </th>
+                    </th> --}}
                     <th>
                       Número de Kill
                     </th>
@@ -36,7 +36,7 @@
                   <tbody>
                     @foreach ($pontoKill as $item)
                       <tr>
-                        <td> {{$item->nome_temporada}} </td>
+                        {{-- <td> {{$item->nome_temporada}} </td> --}}
                         <td> {{$item->num_kill}} </td>
                         <td> {{$item->ponto_kill}} </td>
                         <td> 

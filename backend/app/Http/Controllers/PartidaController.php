@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\partida;
+use App\Partida;
 use App\Repositories\PartidaRepository;
 
 use Carbon\Carbon;
@@ -36,7 +36,7 @@ class PartidaController extends Controller
         $error = "";
         $data = $request->all();
 
-        $partida = new partida;
+        $partida = new Partida;
         $partida->fill($data);
         
         $partida->save();
@@ -74,7 +74,7 @@ class PartidaController extends Controller
         $error = "";
         $data = $request->all();
 
-        $partida = partida::find($id); 
+        $partida = Partida::find($id); 
 
         if (!$partida)
         {

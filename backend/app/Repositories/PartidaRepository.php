@@ -17,5 +17,10 @@ class PartidaRepository
 	{
         return  Partida::where('id', $id)->first();
 	}  
+
+	public function pesquisarPartidasTemporada($id)
+	{
+        return  Partida::where('id_temporada', $id)->get();
+	}  
 	
 }

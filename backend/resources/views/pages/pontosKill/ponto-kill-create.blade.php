@@ -22,7 +22,7 @@
                
                 {{csrf_field()}}
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label for="id_temporara">Temporada</label> 
                   <select name="id_temporara" class="custom-select" required>
                     <option disabled selected>Selecione um Time</option>
@@ -32,7 +32,7 @@
                     @endforeach
 
                   </select>
-                </div>
+                </div> --}}
 
                 <p style="{ margin-top: 3cm; }"></p>
 

@@ -18,7 +18,7 @@
           <div class="card-body">
             <div class="table-responsive">
               <div class="container-fluid">
-                <table class="table table-hover table-sm">
+                <table class="table table-striped">
                   <thead class=" text-primary">
                     <th>
                       Guild
@@ -33,10 +33,15 @@
                   <tbody>
                     @foreach ($times as $time)
                       <tr>
-                      <td> <img src="<?= $time->logo; ?>"  height="42" width="42"> 
-                        {{" - ". $time->logo}} 
+                      <td> 
+                      <img 
+                        class="img-responsive img thumbnail" 
+                        src="/storage/{{$time->logo}}" > 
+                        <span class="font-weight-bold">{{$time->nome_time}}</span>
                       </td>
-                        <td> {{$time->nome_representante}} </td>
+                      <td> 
+                        <span class="font-weight-bold">{{$time->nome_representante}} </span>
+                      </td>
                         <td>
 
                           <a href="{{ url('/time-edit', ['id' => $time->id]) }}">
@@ -47,7 +52,6 @@
 
                           <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
                             <button class="btn btn-danger btn-sm">
-                            {{-- <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> --}}
                               <span class="material-icons">delete</span>
                             </button>
                           </a>
@@ -57,28 +61,6 @@
                     @endforeach
                   </tbody>
                 </table>
-                
-                {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <h6>Tem certeza que deseja apagar o time {{$time->nome_time}}</h6>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <a href="{{ url('/time-delete', ['id' => $time->id]) }}">
-                          <button type="button" class="btn btn-danger">Confirma</button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div> --}}
 
               </div>
             </div>
@@ -88,6 +70,16 @@
     </div>
   </div>
 </div>
+
+<style>
+  img{
+  background-color: #ddd;
+  border-radius: 100%;
+  height: 4rem;
+  object-fit: cover;
+  width: 4rem;  
+}
+</style>
 
 
 @endsection

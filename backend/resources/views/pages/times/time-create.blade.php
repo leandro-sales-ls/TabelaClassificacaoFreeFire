@@ -18,7 +18,7 @@
             <div class="table-responsive">
 
               <br>
-              <form action="time-create" method="POST">
+              <form action="time-create" method="POST" enctype="multipart/form-data">
 
                 {{csrf_field()}}
                 <div class="form-group">
@@ -30,7 +30,7 @@
 
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" id="logo" name="logo" required>
-                    <label class="custom-file-label" for="logo">Selecione uma logo</label>
+                    <label class="custom-file-label" for="logo">Selecione</label>
                   </div>
                 </div>
 

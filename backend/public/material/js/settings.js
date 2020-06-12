@@ -173,7 +173,13 @@ $(document).ready(function() {
   }, 700);
 });
 
+
 $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });
+  
+
+//   $( ".qtd_kill" ).change(function(val) {
+//     console.log(true)
+//   });

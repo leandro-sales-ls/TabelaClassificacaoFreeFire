@@ -70,6 +70,13 @@
         </a>
       </li>
 
+      <li class="nav-item{{ $activePage == 'classificacaoPartida' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('classificacaoPartida') }}">
+          <i class="material-icons">content_paste</i>
+            <p>{{ __('Classificação do Time') }}</p>
+        </a>
+      </li>
+
       <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('table') }}">
           <i class="material-icons">content_paste</i>

@@ -11,6 +11,9 @@ use App\Repositories\TimeRepository;
 use App\TemporadaTime;
 use App\Repositories\TemporadaTimeRepository;
 
+use App\Partida;
+use App\Repositories\PartidaRepository;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -42,6 +45,22 @@ class TemporadaController extends Controller
         $temporada->fill($data);
         
         if ($temporada->save()) {
+
+            $numMaxPartida = $temporada['num_max_partida'];
+
+            $repository = new TemporadaRepository;
+            $id = $repository->findSingleDescId();
+            $id = $id->id;
+
+            for($i = 1; $i <= $numMaxPartida; $i++){
+                $data = array(
+                    'num_rodada' => $i,
+                    'id_temporada' => $id
+                );
+                $partida = new Partida;
+                $partida->fill($data);
+                $partida->save();
+            }
            
             $alert = [
                 'status' => 'success', 

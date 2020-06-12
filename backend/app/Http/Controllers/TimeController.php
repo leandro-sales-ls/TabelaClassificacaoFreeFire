@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+use File;
+
 class TimeController extends Controller
 {
 
@@ -21,15 +24,7 @@ class TimeController extends Controller
         $times = new TimeRepository;
         $times = $times->findAll();
 
-        // foreach ($times as $time) {
-        //     $logo = base64_encode($time->logo);
-        //     $mime = Storage::get($logo);
-        //     $src  = 'data: '.$mime.';base64,'.$logo;
-
-        //     $time->logo = 'data: image/jpeg;base64,'.$logo;
-        // }
-
-        // var_dump($times->logo);die;
+       
 
         return view('pages.times.time', [
             'times' => $times
@@ -38,13 +33,13 @@ class TimeController extends Controller
 
     public function store(Request $request)
     {
+        
         try{
         $data = $request->all();
-
-        // $upload = Storage::put('file.jpg', $data['logo']);
-        
-        // $data['logo'] = base64_encode($data['logo']);        
-
+        if ($imagem = $request->file('logo')) {
+            $path = $imagem = $request->file('logo')->store('logo','public');
+        }
+        $data["logo"] = $path;
         $time = new Time;
         $time->fill($data);
 
@@ -67,7 +62,7 @@ class TimeController extends Controller
 
         return view('pages.times.time-create',
             [
-                'times'  => $time,
+                // 'times'  => $time,
                 'alert' => $alert
             ]
         );
@@ -83,9 +78,7 @@ class TimeController extends Controller
         {
             $error = "time não encontrado";
         }
-
-        // var_dump($time->id);die;
-
+        
         return view('pages.times.time-edit', [
             'time' => $time,
         ]);
@@ -97,6 +90,12 @@ class TimeController extends Controller
         $error = "";
         $data = $request->all();
 
+        if ($imagem = $request->file('logo')) {
+            $path = $imagem = $request->file('logo')->store('logo','public');
+            
+        }
+        $data["logo"] = $path;
+    
         $time = Time::find($id);
 
         if (!$time)
