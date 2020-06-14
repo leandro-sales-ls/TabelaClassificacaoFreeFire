@@ -54,6 +54,22 @@ class ClassificacaoPartidaController extends Controller
 
         $data = $request->all(); 
 
+        if (empty($data['id_temporada'])){
+
+            $temporadas = new TemporadaRepository;
+            $temporadas = $temporadas->findAll();
+
+            $alert = [
+                'status' => 'error', 
+                'message' => 'A temporada deve ser informada'
+            ];
+
+            return view('pages.classificacaoPartida.classificacao', [
+            'temporadas' => $temporadas, 
+            'alert' => $alert
+            ]);
+        }
+        
         $temporadas = new TemporadaRepository;
         $temporadas = $temporadas->find($data['id_temporada']);
         
@@ -72,6 +88,25 @@ class ClassificacaoPartidaController extends Controller
         
         $temporadas = new TemporadaRepository;
         $temporadas = $temporadas->find($data['id_temporada']);
+
+        if (empty($data['id_partida']) ){
+
+            $alert = [
+                'status' => 'error', 
+                'message' => 'A rodada deve ser informada'
+            ];
+
+            $partida = new PartidaRepository;
+            $partida = $partida->pesquisarPartidasTemporada($temporadas->id);
+
+            return view('pages.classificacaoPartida.classificacao-partida', [
+            'temporada' => $temporadas, 
+            'partidas' => $partida,
+            'alert' => $alert
+            ]);
+
+        }
+        
         
         $partida = new PartidaRepository;
         $partida = $partida->find($data['id_partida']);
@@ -144,6 +179,8 @@ class ClassificacaoPartidaController extends Controller
                     $verificarExiste = new SomaPontosKillPartidaRepository;
                     $verificarExiste =  $verificarExiste->find($data['id_classificacao_partida']);
 
+                   
+
                     if (!$verificarExiste) {
 
                         $somaPontosKillPartida = new SomaPontosKillPartida;
@@ -155,69 +192,59 @@ class ClassificacaoPartidaController extends Controller
                                 'status' => 'success', 
                                 'message' => 'Cadastro da pontuação do time realizado com sucesso'
                             ];
-                            
-                            $temporadas = new TemporadaRepository;
-                            $temporadas = $temporadas->find($data['id_temporada']);
-                            
-                            $partida = new PartidaRepository;
-                            $partida = $partida->find($data['id_partida']);
 
-                            $pontoPosicao = $data['pontoPosicao'];
-                            $pontoPosicao = json_decode($pontoPosicao);
-                            $pontoPosicao = (object)$pontoPosicao;
-
-                            $temporadaTime = new TemporadaTimeRepository;
-                            $temporadaTime = $temporadaTime->find($data['id_temporada']);
-
-                            $y = 0;
-                            $posicaoLivre = array();
-                            
-                            foreach ($pontoPosicao as $posicao){
-
-                                if ($posicao->id == $data['id_posicao']) { 
-                                    unset($posicao);
-                                    var_dump("teste");
-                                }else{
-                                    array_push($posicaoLivre, $posicao);
-                                }
-                                
-                                $y ++;
-                                
-                            }
-                                
-                            $txtpontoPosicao = json_encode($posicaoLivre);
-
-                            $qtd_kill = array();
-
-                            for ($i=0; $i<=50; $i++) {
-                                array_push($qtd_kill, $i);
-                            }
-
-                            // var_dump($qtd_kill);die;
-
-                            return view('pages.classificacaoPartida.classificacao-partida-times', [
-                                'partidas' => $partida,
-                                'temporada' => $temporadas,
-                                'temporadaTime' => $temporadaTime,
-                                'pontoPosicao' => $posicaoLivre,
-                                'qtd_kill' => $qtd_kill,
-                                'txtpontoPosicao' => $txtpontoPosicao,
-                                'alert'=>$alert
-                            ]);
-
-                        }else {
-                            return 'n';
                         }
 
                     } else {
 
-                        return 'já existe cadastrado, clique em editar para alterar a informação';
+                        $alert = [
+                            'status' => 'error', 
+                            'message' => 'Este time já esta cadastrado nesta rodada/temporada'
+                        ];
                     }
 
                 }
   
             } else {
-                return '222 já existe cadastrado, clique em editar para alterar a informação';
+                $alert = [
+                    'status' => 'error', 
+                    'message' => 'Este time já esta cadastrado nesta rodada/temporada'
+                ];
+            }
+
+
+            $temporadas = new TemporadaRepository;
+            $temporadas = $temporadas->find($data['id_temporada']);
+            
+            $partida = new PartidaRepository;
+            $partida = $partida->find($data['id_partida']);
+
+            $pontoPosicao = $data['pontoPosicao'];
+            $pontoPosicao = json_decode($pontoPosicao);
+            $pontoPosicao = (object)$pontoPosicao;
+
+            $temporadaTime = new TemporadaTimeRepository;
+            $temporadaTime = $temporadaTime->find($data['id_temporada']);
+
+            $y = 0;
+            $posicaoLivre = array();
+            
+            foreach ($pontoPosicao as $posicao){
+
+                if ($posicao->id == $data['id_posicao']) { 
+                    unset($posicao);
+                }else{
+                    array_push($posicaoLivre, $posicao);
+                }
+                $y ++;  
+            }
+                
+            $txtpontoPosicao = json_encode($posicaoLivre);
+
+            $qtd_kill = array();
+
+            for ($i=0; $i<=50; $i++) {
+                array_push($qtd_kill, $i);
             }
 
    
@@ -229,6 +256,16 @@ class ClassificacaoPartidaController extends Controller
             ];
             
         }
+
+        return view('pages.classificacaoPartida.classificacao-partida-times', [
+            'partidas' => $partida,
+            'temporada' => $temporadas,
+            'temporadaTime' => $temporadaTime,
+            'pontoPosicao' => $posicaoLivre,
+            'qtd_kill' => $qtd_kill,
+            'txtpontoPosicao' => $txtpontoPosicao,
+            'alert'=>$alert
+        ]);
 
 
 
@@ -317,8 +354,6 @@ class ClassificacaoPartidaController extends Controller
         {
             $error = "time não encontrado";
         }
-
-        // var_dump($time->id);die;
 
         return view('pages.times.time-edit', [
             'time' => $time,
@@ -446,8 +481,6 @@ class ClassificacaoPartidaController extends Controller
         $classificacao = new VW_ClassificacaoRepository;
         $id = '11';
         $classificacao = $classificacao->findTemporada($id);
-
-        // var_dump($classificacao);die;
 
         return view('pages.classificacaoTemporada.classificacao-temporada', [
             'temporadas' => $temporadas,

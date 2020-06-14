@@ -28,7 +28,7 @@
         &copy;
         <script>
             document.write(new Date().getFullYear())
-        </script>, -  by Leandro Sales -  Todos os direitos reservados.
+        </script> -  by Leandro Sales -  Todos os direitos reservados.
         </div>
     </div>
 </footer>

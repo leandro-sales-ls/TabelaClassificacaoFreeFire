@@ -11,7 +11,7 @@
     <span class="navbar-toggler-icon icon-bar"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end">
-      <form class="navbar-form">
+      {{-- <form class="navbar-form">
         <div class="input-group no-border">
         <input type="text" value="" class="form-control" placeholder="Search...">
         <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -19,9 +19,9 @@
           <div class="ripple-container"></div>
         </button>
         </div>
-      </form>
-      <ul class="navbar-nav">
-        <li class="nav-item">
+      </form> --}}
+       <ul class="navbar-nav">
+        {{--<li class="nav-item">
           <a class="nav-link" href="{{ route('home') }}">
             <i class="material-icons">dashboard</i>
             <p class="d-lg-none d-md-block">
@@ -44,7 +44,7 @@
             <a class="dropdown-item" href="#">{{ __('Another Notification') }}</a>
             <a class="dropdown-item" href="#">{{ __('Another One') }}</a>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item dropdown">
           <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="material-icons">person</i>
@@ -53,10 +53,10 @@
             </p>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a>
-            <a class="dropdown-item" href="#">{{ __('Settings') }}</a>
+            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Perfil') }}</a>
+            <a class="dropdown-item" href="#">{{ __('Configurações') }}</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Log out') }}</a>
+            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('Sair') }}</a>
           </div>
         </li>
       </ul>
