@@ -28,6 +28,9 @@ use App\Repositories\SomaPontosKillPartidaRepository;
 use App\ClassificacaoPartida;
 use App\Repositories\ClassificacaoPartidaRepository;
 
+use App\Vw_classificacao;
+use App\Repositories\VW_ClassificacaoRepository;
+
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -123,7 +126,7 @@ class ClassificacaoPartidaController extends Controller
 
             $ExisteClassificaPartida = new ClassificacaoPartidaRepository;
             $ExisteClassificaPartida =  $ExisteClassificaPartida->existeCadastrado(
-                $data['id_temporada_time']
+                $data['id_temporada_time'],  $data['id_partida']
             );
 
             if (!$ExisteClassificaPartida) {
@@ -433,6 +436,23 @@ class ClassificacaoPartidaController extends Controller
             'alert' => $alert
         ]);
 
+    }
+
+    public function Classificacao() {
+
+        $temporadas = new TemporadaRepository;
+        $temporadas = $temporadas->findAll();
+
+        $classificacao = new VW_ClassificacaoRepository;
+        $id = '11';
+        $classificacao = $classificacao->findTemporada($id);
+
+        // var_dump($classificacao);die;
+
+        return view('pages.classificacaoTemporada.classificacao-temporada', [
+            'temporadas' => $temporadas,
+            'classificacao' => $classificacao
+        ]);
     }
 
 

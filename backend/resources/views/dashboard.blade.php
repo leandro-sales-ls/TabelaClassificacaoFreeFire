@@ -7,7 +7,7 @@
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
-              <div class="card-icon">
+              {{-- <div class="card-icon">
                 <i class="material-icons">content_copy</i>
               </div>
               <p class="card-category">Used Space</p>
@@ -409,7 +409,7 @@
                     <td>Korea, South</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> --}}
             </div>
           </div>
         </div>

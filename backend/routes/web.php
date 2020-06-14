@@ -75,15 +75,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('classificacao-partida', 'ClassificacaoPartidaController@classificacaoPartida');
 	Route::post('classificacao-partida-times', 'ClassificacaoPartidaController@classificacaoTimes');
 	Route::post('classificacao-times', 'ClassificacaoPartidaController@storeClassificacaoTimes');
-	// Route::post('ponto-posicao-create', 'PontoPosicaoController@store');
-	// Route::get('/ponto-posicao-delete/{id}', 'PontoPosicaoController@delete');
-	// Route::get('/ponto-posicao-edit/{id}', 'PontoPosicaoController@edit');
-	// Route::get('/ponto-posicao-update/{id}', 'PontoPosicaoController@update');
 
 
-	Route::get('table-list', function () {
-		return view('pages.table_list');
-	})->name('table');
+	Route::get('classificacao-temporada', 'ClassificacaoPartidaController@classificacao')
+	->name('classificacaoTemporada');
 
 	Route::get('typography', function () {
 		return view('pages.typography');

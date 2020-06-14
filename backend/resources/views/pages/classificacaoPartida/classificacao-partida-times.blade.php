@@ -9,6 +9,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
+        <div class="form-group">
+          <a href="/classificacao"><button class="btn btn-secondary">Voltar</button></a>
+        </div>
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">Classificação do Time</h4>
@@ -62,6 +65,8 @@
           </div>
         </div>
 
+
+
         <div class="card">
           <div class="card-header card-header-primary">
             <h4 class="card-title ">
@@ -72,26 +77,24 @@
           <div class="card-body">
             <div class="table-responsive">
               <table class="table">
-                
                 <thead class=" text-primary">
-                  <th>
-                    Nome da Guilda
-                  </th>
-                  <th>
-                    Nome do Representante
-                  </th>
-                  <th>
-                    Posição da rodada nº  <b>{{$partidas->num_rodada}}<b>
-                  </th>
-                  <th>
-                    Quantidade de Kill
-                  </th>
-                  {{-- <th>
-                    Ações
-                  </th> --}}
-                </thead>
-
-                <tbody>
+                    <th>
+                      Nome da Guilda
+                    </th>
+                    <th>
+                      Nome do Representante
+                    </th>
+                    <th>
+                      Posição da rodada nº  <b>{{$partidas->num_rodada}}<b>
+                    </th>
+                    <th>
+                      Quantidade de Kill
+                    </th>
+                    <th>
+                      Ações
+                    </th>
+                  </thead>
+                  <tbody>
                     @foreach ($temporadaTime as $temp)
                       <tr>
                         <td> <img 
@@ -102,7 +105,8 @@
                         <td> 
                           <span class="font-weight-bold">{{$temp->nome_representante}} </span>
                         </td>
-                        
+                        <form action="classificacao-times" method="POST" enctype="multipart/form-data">
+                          {{csrf_field()}}
                         <td>
                           <select name="id_posicao" class="custom-select" required>
                             <option disabled selected>Posição do time</option>
@@ -123,39 +127,30 @@
                           
                         </td>
   
-                        {{-- <td> 
+                        <td> 
   
                             <input type="hidden" name="id_temporada_time" value="{{$temp->id}}">
                             <input type="hidden" name="id_partida" value="{{$partidas->id}}">
                             <input type="hidden" name="pontoPosicao" 
                               value="{{$txtpontoPosicao ? $txtpontoPosicao : $pontoPosicao}}">
+                            {{-- <input type="hidden" name="id_partida" value="{{$partidas->id}}"> --}}
   
                             <button type="submit" class="btn btn-success btn-sm">
                               <span class="material-icons">note_add</span>
                             </button> 
-
-                        </td> --}}
+  
+                          </form>
+  
+                          {{-- <a href="{{ url('/temporada-time-delete', array('id' => $temp->id, 'id_temporada' => $temporada->id)) }}">
+                            <button class="btn btn-warning btn-sm">
+                              <span class="material-icons">edit</span>
+                            </button> 
+                          </a> --}}
+                        </td>
                       </tr>                      
                     @endforeach 
-                </tbody>
+                  </tbody>
               </table>
-
-              <br>
-
-              <div class="form-group">
-                <form action="classificacao-times" method="POST" enctype="multipart/form-data">
-                  {{csrf_field()}}
-
-
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-success ">
-                      Salvar
-                      <span class="material-icons">note_add</span>
-                    </button> 
-                  </div>
-                </form> 
-              </div>
-
             </div>
           </div>
         </div>
@@ -175,4 +170,3 @@
 
 
 @endsection
-

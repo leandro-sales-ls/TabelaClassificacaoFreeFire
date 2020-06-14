@@ -27,9 +27,11 @@ class ClassificacaoPartidaRepository
 		
 	}  
 
-	public function existeCadastrado($id)
+	public function existeCadastrado($id, $id_partida)
 	{
-        return  ClassificacaoPartida::where('id_temporada_time', $id)->first();
+		return  ClassificacaoPartida::where('id_temporada_time', $id)
+		->where('id_partida', $id_partida)
+		->first();
 	} 
 
 	

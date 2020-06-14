@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
   <div class="logo">
-    <a href="https://creative-tim.com/" class="simple-text logo-normal">
+    <a href="/classificacao-temporada" class="simple-text logo-normal">
       {{ __('Bad Company') }}
     </a>
   </div>
@@ -44,7 +44,7 @@
 
       <li class="nav-item{{ $activePage == 'time' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('time') }}">
-          <i class="material-icons">content_paste</i>
+          <i class="material-icons">group_add</i>
             <p>{{ __('Times') }}</p>
         </a>
       </li>
@@ -58,14 +58,14 @@
 
       <li class="nav-item{{ $activePage == 'pontoKill' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('pontoKill') }}">
-          <i class="material-icons">library_books</i>
+          <i class="material-icons">score</i>
             <p>{{ __('Ponto por Kill') }}</p>
         </a>
       </li>
 
       <li class="nav-item{{ $activePage == 'pontoPosicao' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('pontoPosicao') }}">
-          <i class="material-icons">library_books</i>
+          <i class="material-icons">score</i>
             <p>{{ __('Ponto por Posição') }}</p>
         </a>
       </li>
@@ -77,37 +77,37 @@
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'table' ? ' active' : '' }}">
-        <a class="nav-link" href="{{ route('table') }}">
-          <i class="material-icons">content_paste</i>
+      <li class="nav-item{{ $activePage == 'classificacaoTemporada' ? ' active' : '' }}">
+        <a class="nav-link" href="{{ route('classificacaoTemporada') }}">
+          <i class="material-icons">emoji_events</i>
             <p>{{ __('Classifição') }}</p>
         </a>
       </li>
 
-      <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
+      {{-- <li class="nav-item{{ $activePage == 'typography' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('typography') }}">
           <i class="material-icons">library_books</i>
             <p>{{ __('Typography') }}</p>
         </a>
-      </li>
-      <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
+      </li> --}}
+      {{-- <li class="nav-item{{ $activePage == 'icons' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('icons') }}">
           <i class="material-icons">bubble_chart</i>
           <p>{{ __('Icons') }}</p>
         </a>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item{{ $activePage == 'map' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('map') }}">
           <i class="material-icons">location_ons</i>
             <p>{{ __('Maps') }}</p>
         </a>
       </li> --}}
-      <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
+      {{-- <li class="nav-item{{ $activePage == 'notifications' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('notifications') }}">
           <i class="material-icons">notifications</i>
           <p>{{ __('Notifications') }}</p>
         </a>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item{{ $activePage == 'language' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('language') }}">
           <i class="material-icons">language</i>
