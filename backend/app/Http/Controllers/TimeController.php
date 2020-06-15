@@ -167,13 +167,15 @@ class TimeController extends Controller
         $repository = new TimeRepository;
         $time = $repository->find($id);
 
+        // var_dump($time->logo);die;
+
         if (!$time)
         {
             $error = "Time não encontrado";
 
         } else {
             try {
-                if ($time->delete()) {
+                if (Storage::disk('public')->delete($time->logo) && $time->delete()) {
 
                     $alert = [
                         'status' => 'success', 
